@@ -7,6 +7,7 @@ import {
     inject,
     Output,
 } from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {ResizeObserverService} from '@ng-web-apis/resize-observer';
 import {
     animationFrameScheduler,
@@ -58,6 +59,10 @@ export class PanZoomComponent {
     private readonly resizeObserver$ = inject(ResizeObserverService);
     private readonly zoom$ = new BehaviorSubject<number>(DF_PAN_ZOOM_INITIAL_SCALE);
     private readonly coordinates$ = new BehaviorSubject<DfPoint>(INITIAL_COORDINATES);
+    private readonly coordinates = toSignal(this.coordinates$, {
+        initialValue: INITIAL_COORDINATES,
+    });
+
     private readonly manualZoomAnimation$ = new Subject<boolean>();
     private readonly dragStage$ = new Subject<DfDragDropStage>();
 
@@ -140,6 +145,17 @@ export class PanZoomComponent {
     public resetPanzoom(): void {
         this.zoom$.next(DF_PAN_ZOOM_INITIAL_SCALE);
         this.coordinates$.next(INITIAL_COORDINATES);
+    }
+
+    public setPosition(position?: DfPoint & {zoom?: number}): void {
+        if (position?.zoom) {
+            this.zoom$.next(DF_PAN_ZOOM_INITIAL_SCALE);
+        }
+
+        this.coordinates$.next({
+            ...this.coordinates(),
+            ...position,
+        });
     }
 
     public setScale(scale: number): void {
