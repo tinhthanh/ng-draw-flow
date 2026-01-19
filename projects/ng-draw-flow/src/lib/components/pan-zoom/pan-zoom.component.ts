@@ -58,6 +58,10 @@ export class PanZoomComponent {
 
     private readonly resizeObserver$ = inject(ResizeObserverService);
     private readonly zoom$ = new BehaviorSubject<number>(DF_PAN_ZOOM_INITIAL_SCALE);
+    private readonly zoom = toSignal(this.zoom$, {
+        initialValue: DF_PAN_ZOOM_INITIAL_SCALE,
+    });
+
     private readonly coordinates$ = new BehaviorSubject<DfPoint>(INITIAL_COORDINATES);
     private readonly coordinates = toSignal(this.coordinates$, {
         initialValue: INITIAL_COORDINATES,
@@ -149,7 +153,7 @@ export class PanZoomComponent {
 
     public setPosition(position?: DfPoint & {zoom?: number}): void {
         if (position?.zoom) {
-            this.zoom$.next(DF_PAN_ZOOM_INITIAL_SCALE);
+            this.zoom$.next(position.zoom || this.zoom());
         }
 
         this.coordinates$.next({
