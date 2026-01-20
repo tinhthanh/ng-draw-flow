@@ -8,6 +8,7 @@ import {
     type DfDataModel,
     type DfDataNode,
     type DfEvent,
+    type DfPoint,
 } from '../ng-draw-flow.interfaces';
 
 type Nullable<T> = T | null;
@@ -114,6 +115,11 @@ export class NgDrawFlowStoreService {
     /** Resets pan and zoom on the live editor. */
     public resetPosition(): void {
         this.host?.resetPosition();
+    }
+
+    /** Set both zoom and coordinates. */
+    public setPosition(position?: DfPoint & {zoom?: number}): void {
+        this.host?.setPosition(position);
     }
 
     /**

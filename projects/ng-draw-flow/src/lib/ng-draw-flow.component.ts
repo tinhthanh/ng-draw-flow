@@ -34,6 +34,7 @@ import {
     type DfDataModel,
     type DfDataNode,
     type DfEvent,
+    type DfPoint,
 } from './ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from './ng-draw-flow.token';
 import {CoordinatesService} from './services/coordinates.service';
@@ -186,6 +187,11 @@ export class NgDrawFlowComponent
     /** Zooms one step *out* from the center of the scene. */
     public zoomOut(): void {
         this.panzoom.zoomOut();
+    }
+
+    /** Set both zoom and coordinates. */
+    public setPosition(position?: DfPoint & {zoom?: number}): void {
+        this.panzoom.setPosition(position);
     }
 
     /** Resets both zoom factor and pan offset to their defaults. */
