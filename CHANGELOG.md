@@ -1,3 +1,14 @@
+### [0.19.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.18.1...v0.19.0) (2026-01-21)
+
+### 🚀 Features
+
+- **ng-draw-flow**: add method to set position
+  [(cf07de3)](https://github.com/taiga-family/ng-draw-flow/commit/cf07de3a99abe2be906f95dbccaa0bf0b8333ae1)
+
+### 🐞 Bug Fixes
+
+- zoom [(e918380)](https://github.com/taiga-family/ng-draw-flow/commit/e9183802eb404c9a7d1009ed9f6f29fd2bef897f)
+
 ### [0.18.1](https://github.com/taiga-family/ng-draw-flow/compare/v0.18.0...v0.18.1) (2025-12-02)
 
 ### 🐞 Bug Fixes
